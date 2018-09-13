@@ -1255,8 +1255,6 @@
     dino_parts.eyes[3].style.backgroundImage = 'url(eyes3.png)';
     dino_parts.eyes[4] = cd('dino_eyes');
     dino_parts.eyes[4].style.backgroundImage = 'url(eyes4.png)';
-    dino_parts.eyes[5] = cd('dino_eyes');
-    dino_parts.eyes[5].style.backgroundImage = 'url(eyes5.png)';
 
     dino_parts.heads[0] = cd('dino_head');
     (function(){
@@ -1309,9 +1307,9 @@
         for(var i = 0; i < 6; ++i)
         {
             var elem = cd('dino_tail_box');
-            if(i < 4)elem.style.transform = 'rotateY(' + (i * 90) + 'deg) rotateY(90deg) translateZ(.75vw)';
-            else if(i === 4) elem.style.transform = 'rotateX(90deg) translateZ(.75vw)';
-            else elem.style.transform = 'rotateX(-90deg) translateZ(.75vw)';
+            if(i < 4)elem.style.transform = 'rotateY(' + (i * 90) + 'deg) rotateY(90deg) translateZ(.7vw)';
+            else if(i === 4) elem.style.transform = 'rotateX(90deg) translateZ(.7vw)';
+            else elem.style.transform = 'rotateX(-90deg) translateZ(.7vw)';
 
             dino_parts.tails[2].appendChild(elem);
         }
@@ -1333,9 +1331,9 @@
         for(var i = 0; i < 6; ++i)
         {
             var elem = i < 4 ? cd('dino_torso') : cd('dino_torso_ends');
-            if(i < 4)elem.style.transform = 'rotateZ(' + (i * 90) + 'deg) rotateX(90deg) translateZ(1.25vw)';
-            else if(i < 5) elem.style.transform = 'rotateX(0) translateZ(1.75vw)';
-            else elem.style.transform = 'rotateX(0) translateZ(-1.75vw)';
+            if(i < 4)elem.style.transform = 'rotateZ(' + (i * 90) + 'deg) rotateX(90deg) translateZ(1.2vw)';
+            else if(i < 5) elem.style.transform = 'rotateX(0) translateZ(1.7vw)';
+            else elem.style.transform = 'rotateX(0) translateZ(-1.7vw)';
             dino_parts.torso.appendChild(elem);
         }
         for(var i = 0; i < 2; ++i)for(var j = 0; j < 2; ++j)
@@ -1412,20 +1410,16 @@
                     price: 5
                 },
                 {
-                    name: 'Eyepatch',
+                    name: 'Sunglasses',
                     look: dino_parts.eyes[3],
-                    price: 5
+                    price: 10
                 },
                 {
                     name: 'Cyclops Eye',
                     look: dino_parts.eyes[4],
                     price: 10
-                },
-                {
-                    name: 'Sunglasses',
-                    look: dino_parts.eyes[5],
-                    price: 20
                 }
+
             ],
             Heads: [
                 {
@@ -1654,7 +1648,6 @@
     function start_jump_interval(player)
     {
         stop_jump_interval(player);
-        playaudio('jump');
         if(player === undefined || player == 1) {
             jump_direction = 'up';
             jump_mode = true;
@@ -1855,12 +1848,7 @@
         //setTimeout(change_daystate, 10000);
     }
    // setTimeout(change_daystate, 10000);
-    var obsticles_placed = [/*{
-        type: 'cactus',
-        pos: 4,
-        slice: 2,
-        look: null
-    }*/];
+    var obsticles_placed = [];
     function spawn(obj, slice, pos)
     {
         var elem = obsticles[obj].look;
@@ -2200,7 +2188,7 @@
 
     function die(pl)
     {
-        playaudio('bump');
+
         game_started = false;
         map_rate = 0;
         if(isChrome)gid('container').style.filter = 'blur(1.5vw)';
@@ -2224,24 +2212,10 @@
     }
     update_highscore();
 
-    var audio = {bump: new Audio('bump.mp3'), coin: new Audio('coin.mp3'), jump: new Audio('jump.mp3')};
-    function playaudio(sound, loop)
-    {
-        //if(audio[sound].currentTime != undefined && audio[sound].currentTime != 0) {
-        audio[sound].currentTime = 0;
-        if(loop == 'loop')
-        {
-            audio[sound].loop = 'loop';
-        }
-        audio[sound].play();
-    }
-    function pauseaudio(sound)
-    {
-        audio[sound].pause();
-    }
+
     function collect_coin()
     {
-        playaudio('coin');
+
         ++coins;
         gid('coin_cont').innerHTML = coins + '$';
 
